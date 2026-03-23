@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><!-- use theme color or fallback -->
+<!--use textcolor from settings, otherwise create a contrasting color to theme color-->
+<head><meta charset="utf-8"/><link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><link href="../../../bootstrap/css/bootstrap-select.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600,600italic,400" rel="stylesheet" type="text/css"/><link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css"/><script src="../../../jquery-1.9.1.min.js"></script><script src="../../../bootstrap/js/bootstrap.min.js"></script><script src="../../../bootstrap/js/bootstrap-select.min.js"></script><link href="../../../styles.css" rel="stylesheet"/><link href="../../../extra-styles.css" rel="stylesheet"/><link href="../../../haxe-nav.css" rel="stylesheet"/><link href="../../../dark-mode.css" rel="stylesheet"/><script>var dox = {rootPath: "../../../",platforms: ["api"]};</script><script src="../../../nav.js"></script><script src="../../../index.js"></script><link rel="icon" href="../../../favicon.ico" type="image/x-icon"/><title>s.markup.elements.ImageElement - sengine API</title><meta name="description" content="Image-based drawable markup element."/></head><body><script>/* Here to prevent flash of unstyled content */let systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;if ((!localStorage.theme && systemDarkMode) || localStorage.theme == "dark") {document.body.style.backgroundColor = "#111";document.body.style.opacity = "0";document.addEventListener("DOMContentLoaded", function(event) {toggleTheme();document.body.style.backgroundColor = "";document.body.style.opacity = "";});}</script><style>
+.navbar .brand {
+	display: inline-block;
+	float: none;
+	text-shadow: 0 0 0 transparent;
+}
+</style><nav class="nav"><div class="navbar"><div class="navbar-inner" style="background:#FAFAFA; border-bottom:1px solid rgba(0,0,0,.09)"><div class="container"><a class="brand" style="color:#000000" href="../../../">sengine API</a><a href="#" id="theme-toggle" class="brand" style="color:#000000" onclick="toggleTheme()" title="Toggle Dark Mode"><i class="fa fa-moon-o"></i></a></div></div></div></nav><div class="container main-content"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><form class="form-search" id="searchForm"><div class="input-prepend input-block-level"><span class="add-on"><i class="fa fa-search"></i></span><input id="search" type="text" placeholder="Filter (Ctrl+P)" autocomplete="off"/></div></form></div><div class="well sidebar-nav" id="explorer"><div id="nav"></div></div></div><div class="span9"><div class="page-header"><span class="viewsource"><a href="https://github.com/selibs/sengine/tree/main/src/s/markup/elements/ImageElement.hx" class="btn btn-medium"><i class="fa fa-eye"></i> View source</a></span><h1><small>class</small> ImageElement</h1><h4><small>package <a href="../../../s/markup/elements/index.html">s.markup.elements</a></small></h4><h4><small>extends <span class="type">DrawableElement</span></small></h4>    <span class="label label-meta label-meta-build" title="Builds a class or enum from a macro.">@:build(s.shortcut.ShortcutMacro.build())</span><span class="label label-meta label-meta-autoBuild" title="Extends `@:build` metadata to all extending and implementing classes.">@:autoBuild(s.shortcut.ShortcutMacro.build())</span><span class="label label-meta label-meta-build" title="Builds a class or enum from a macro.">@:build(s.shortcut.ShortcutMacro.mixinBuild())</span><span class="label label-meta label-meta-allow" title="Allows private access from package, type or field.">@:allow(s.markup.graphics.ImageElementDrawer)</span></div><div class="body"><div class="doc doc-main"><p>Image-based drawable markup element.</p>
+<p><code><a href="../../../s/markup/elements/ImageElement.html#ImageElement">ImageElement</a></code> renders a <a href="s.resource.Image"><code><a href="../../../s/resource/Image.html#Image">s.resource.Image</a></code></a> inside the
+rectangular bounds inherited from <a href="s.markup.Element"><code><a href="../../../js/html/Element.html#Element">Element</a></code></a>. The image is
+loaded through an internal <a href="s.assets.ImageAsset"><code><a href="../../../s/assets/ImageAsset.html#ImageAsset">ImageAsset</a></code></a>, can be
+restricted to a source sub-rectangle with
+<a href="s.markup.elements.ImageElement.sourceClipRect"><code>sourceClipRect</code></a>, fitted by
+<a href="s.markup.elements.ImageElement.fillMode"><code>fillMode</code></a>, aligned by
+<a href="s.markup.elements.ImageElement.alignment"><code>alignment</code></a>, and sampled with
+configurable texture sampling through
+<a href="s.markup.elements.ImageElement.smooth"><code>smooth</code></a>,
+<a href="s.markup.elements.ImageElement.mipmap"><code>mipmap</code></a>, or the higher-level
+<a href="s.markup.elements.ImageElement.sampling"><code>sampling</code></a> preset.</p>
+<p>Fill-mode behavior overview:</p><ul><li><a href="s.markup.FillMode.Pad"><code>Pad</code></a>
+Keeps the source at its natural size relative to the element. This may
+leave empty space around the image or cause the image to extend beyond the
+element if the source is larger than the destination.</li><li><a href="s.markup.FillMode.Stretch"><code>Stretch</code></a>
+Scales the sampled source rectangle to exactly match the element bounds.</li><li><a href="s.markup.FillMode.Cover"><code>Cover</code></a>
+Scales uniformly to fill the element bounds, cropping the source rectangle
+when aspect ratios differ.</li><li><a href="s.markup.FillMode.Contain"><code>Contain</code></a>
+Scales uniformly to fit inside the element bounds without cropping,
+potentially leaving empty space.</li><li><a href="s.markup.FillMode.Tile"><code>Tile</code></a>
+Repeats the source horizontally and vertically.</li><li><a href="s.markup.FillMode.TileVertically"><code>TileVertically</code></a>
+Stretches horizontally and repeats vertically.</li><li><a href="s.markup.FillMode.TileHorizontally"><code>TileHorizontally</code></a>
+Repeats horizontally and stretches vertically.</li></ul>
+<p>Alignment behavior overview:</p><ul><li>in <code>Pad</code> and <code>Contain</code>, alignment places the image inside the remaining
+free space</li><li>in <code>Cover</code>, alignment selects which part of the cropped source remains
+visible</li><li>in tiled modes, alignment offsets the tile phase when the element size is
+not an integer multiple of the tile size</li><li>in <code>Stretch</code>, alignment has no visible effect because the image always
+fills the full destination area</li></ul>
+<p>The final sampled color is multiplied by the color property and by the
+element opacity during rendering.</p>
+<p>Typical usage:</p>
+<pre><code class="prettyprint haxe">var image = new ImageElement("ui/logo");
+image.width = 320;
+image.height = 180;
+image.fillMode = Contain;
+image.alignment = AlignCenter;
+image.sampling = Trilinear;</code></pre>
+<p>Example using a texture atlas region:</p>
+<pre><code class="prettyprint haxe">var icon = new ImageElement("atlas/ui");
+icon.width = 32;
+icon.height = 32;
+icon.sourceClipRect = new Rect(64, 0, 32, 32);
+icon.fillMode = Stretch;</code></pre>
+<p>Loading is asynchronous from the point of view of the element API. Until the
+asset is available, <a href="s.markup.elements.ImageElement.isLoaded"><code>isLoaded</code></a> is
+<code>false</code> and the element skips rendering.</p>
+<p><code><a href="../../../s/markup/elements/ImageElement.html#ImageElement">ImageElement</a></code> otherwise behaves like any other
+<a href="s.markup.elements.DrawableElement"><code>DrawableElement</code></a>: it participates in
+layout, anchoring, z-ordering, color modulation, visibility, opacity, and
+child rendering.</p><p class="javadoc">See also:</p><ul><li><div class="inline-content"><p>s.resource.Image</p></div></li><li><div class="inline-content"><p>s.assets.ImageAsset</p></div></li><li><div class="inline-content"><p>s.markup.FillMode</p></div></li><li><div class="inline-content"><p>s.markup.Alignment</p></div></li><li><div class="inline-content"><p>s.markup.geometry.Rect</p></div></li></ul></div><h3 class="section">Constructor</h3><div class="fields"><div class="field "><a name="new"></a><h3 class="anchor"><code><a href="#new"><span class="identifier">new</span></a>(<span style="white-space:nowrap">source:<span class="type">String</span></span>)</code></h3><div class="doc"><p>Creates a new image element bound to the given source asset.</p><p class="javadoc">Parameters:</p><table class="table table-bordered params"><tr><th style="width:25%;"><code>source</code></th><td><p>Resource key or path used to resolve the image asset.</p></td></tr></table></div></div></div><h3 class="section">Variables</h3><div class="fields"><div class="field "><a name="alignment"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(AlignCenter)</span><a href="#alignment"><span class="identifier">alignment</span></a>:<a class="type" title="s.markup.Alignment" href="../../../s/markup/Alignment.html">Alignment</a><span> = AlignCenter</span></code></h3><div class="doc"><p>Alignment policy used together with
+<a href="s.markup.elements.ImageElement.fillMode"><code>fillMode</code></a>.</p>
+<p>Horizontal flags (<code>AlignLeft</code>, <code>AlignHCenter</code>, <code>AlignRight</code>) and vertical
+flags (<code>AlignTop</code>, <code>AlignVCenter</code>, <code>AlignBottom</code>) are interpreted according
+to the active fill mode:</p><ul><li><code>Pad</code> and <code>Contain</code>: place the rendered image inside the leftover space</li><li><code>Cover</code>: choose the visible side of the cropped source</li><li><code>Tile*</code>: offset the repeated texture pattern phase</li></ul>
+<p><code>Stretch</code> ignores alignment because the image always covers the whole
+destination area.</p></div></div><div class="field "><a name="fillMode"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(Stretch)</span><a href="#fillMode"><span class="identifier">fillMode</span></a>:<a class="type" title="s.markup.FillMode" href="../../../s/markup/FillMode.html">FillMode</a><span> = Stretch</span></code></h3><div class="doc"><p>Defines how the image is fitted, cropped, or tiled inside the element.</p>
+<p>The chosen mode affects the derived destination rectangle
+(<a href="s.markup.elements.ImageElement.rect"><code>rect</code></a>), the derived source
+rectangle (<a href="s.markup.elements.ImageElement.clipRect"><code>clipRect</code></a>), and the
+sampler addressing mode used at draw time.</p></div></div><div class="field "><a name="isLoaded"></a><h3 class="anchor"><code><span class="label">read only</span><a href="#isLoaded"><span class="identifier">isLoaded</span></a>:<span class="type">Bool</span></code></h3><div class="doc"><p>Whether the image referenced by
+<a href="s.markup.elements.ImageElement.source"><code>source</code></a> has been loaded.</p>
+<p>When this is <code>false</code>, the element has no texture to draw and therefore
+contributes no pixels.</p></div></div><div class="field "><a name="mipmap"></a><h3 class="anchor"><code><a href="#mipmap"><span class="identifier">mipmap</span></a>:<span class="type">Bool</span></code></h3><div class="doc"><p>Whether the image should use mipmaps when sampled smaller than its native
+size.</p>
+<p>When enabled, the element generates a mip chain for the current image and
+uses linear mip selection. When disabled, mip levels are removed and only
+the base image is sampled.</p></div></div><div class="field "><a name="sampling"></a><h3 class="anchor"><code><a href="#sampling"><span class="identifier">sampling</span></a>:<a class="type" title="s.markup.elements.ImageSampling - Texture sampling presets for ImageElement." href="../../../s/markup/elements/ImageSampling.html">ImageSampling</a></code></h3><div class="doc"><p>Convenience preset that configures <a href="s.markup.elements.ImageElement.smooth"><code>smooth</code></a>
+and <a href="s.markup.elements.ImageElement.mipmap"><code>mipmap</code></a> together.</p>
+<p>Use this when you want a named sampling mode instead of managing the two
+low-level flags separately.</p></div></div><div class="field "><a name="smooth"></a><h3 class="anchor"><code><a href="#smooth"><span class="identifier">smooth</span></a>:<span class="type">Bool</span></code></h3><div class="doc"><p>Whether the image should use linear filtering inside each sampled mip
+level.</p>
+<p>When <code>false</code>, sampling remains pixel-sharp. When <code>true</code>, the image is
+filtered smoothly.</p></div></div><div class="field "><a name="source"></a><h3 class="anchor"><code><a href="#source"><span class="identifier">source</span></a>:<span class="type">String</span></code></h3><div class="doc"><p>Resource key or path of the image to display.</p>
+<p>Assigning this field forwards the value to the internal
+<a href="s.assets.ImageAsset"><code><a href="../../../s/assets/ImageAsset.html#ImageAsset">ImageAsset</a></code></a>. The exact naming scheme depends on the
+project's resource pipeline, but it typically matches the engine's image
+identifiers such as <code>"ui/logo"</code> or <code>"atlas/icons"</code>.</p></div></div><div class="field "><a name="sourceClipRect"></a><h3 class="anchor"><code><span class="label label-meta label-meta-value" title="Used to store default values for fields and function arguments.">@:value(null)</span><a href="#sourceClipRect"><span class="identifier">sourceClipRect</span></a>:<a class="type" title="s.markup.geometry.Rect" href="../../../s/markup/geometry/Rect.html">Rect</a><span> = null</span></code></h3><div class="doc"><p>Optional source-space clipping rectangle in image pixels.</p>
+<p>When <code>null</code>, the full source image is used. When non-null, the element
+first restricts sampling to this rectangle and only then applies the
+current fill-mode logic.</p>
+<p>Coordinates are expressed in source image pixels:</p><ul><li><code>x</code>, <code>y</code>: top-left corner within the image</li><li><code>width</code>, <code>height</code>: size of the source region</li></ul>
+<p>This is primarily useful for atlas-backed UI icons, spritesheet frames, or
+reusable image slices.</p></div></div></div>  </div></div></div></div><footer class="section site-footer" style="background:#FAFAFA"><div class="container"><div class="copyright"><p style="color:#000000">This documentation is generated for version 1.0.0a</p><p style="color:#000000">&copy; 2026 &nbsp;</p></div></div></footer><script src="../../..//highlighter.js"></script><link href="../../../highlighter.css" rel="stylesheet"/></body></html>
